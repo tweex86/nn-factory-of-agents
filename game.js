@@ -147,24 +147,28 @@ const controlButtons = [
     position: POSITIONS.TOP_LEFT,
     key: "A",
     button: { x: 103, y: 490, w: 100, h: 100 },
+    hitbox: { x: 42, y: 430, w: 190, h: 180 },
     arrow: { name: "arrow-top-left.png", x: 51, y: 442, w: 56, h: 70 },
   },
   {
     position: POSITIONS.BOTTOM_LEFT,
     key: "Z",
     button: { x: 103, y: 618, w: 100, h: 100 },
+    hitbox: { x: 42, y: 600, w: 190, h: 190 },
     arrow: { name: "arrow-down-left.png", x: 51, y: 707, w: 56, h: 70 },
   },
   {
     position: POSITIONS.TOP_RIGHT,
     key: "K",
     button: { x: 1398, y: 490, w: 100, h: 100 },
+    hitbox: { x: 1370, y: 430, w: 190, h: 180 },
     arrow: { name: "arrow-top-right.png", x: 1492, y: 442, w: 56, h: 70 },
   },
   {
     position: POSITIONS.BOTTOM_RIGHT,
     key: "M",
     button: { x: 1398, y: 618, w: 100, h: 100 },
+    hitbox: { x: 1370, y: 600, w: 190, h: 190 },
     arrow: { name: "arrow-down-right.png", x: 1492, y: 707, w: 56, h: 70 },
   },
 ];
@@ -323,7 +327,7 @@ function handlePointer(event) {
   }
 
   for (const control of controlButtons) {
-    if (pointInRect(point, control.button)) {
+    if (pointInRect(point, control.hitbox)) {
       movePlayer(control.position);
       return;
     }
