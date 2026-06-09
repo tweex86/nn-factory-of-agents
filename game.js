@@ -246,7 +246,6 @@ const robotCatchOffsets = {
 
 let state;
 let lastTimestamp = 0;
-let fullscreenRequested = false;
 
 function createInitialState() {
   return {
@@ -314,7 +313,6 @@ function pointInRect(point, rect) {
 
 function handlePointer(event) {
   event.preventDefault();
-  requestMobileFullscreenOnce();
   const point = canvasPointFromEvent(event);
 
   if (pointInRect(point, resetButton)) {
@@ -363,24 +361,6 @@ window.addEventListener("keydown", (event) => {
 
 canvas.addEventListener("mousedown", handlePointer);
 canvas.addEventListener("touchstart", handlePointer, { passive: false });
-
-function requestMobileFullscreenOnce() {
-  if (fullscreenRequested || !isLikelyMobile()) {
-    return;
-  }
-
-  fullscreenRequested = true;
-
-  if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
-    document.documentElement.requestFullscreen().catch(() => {
-      // Some mobile browsers reject fullscreen; the responsive layout still fills the viewport.
-    });
-  }
-}
-
-function isLikelyMobile() {
-  return window.matchMedia("(pointer: coarse)").matches || window.innerWidth <= 820;
-}
 
 /* ==================================================
    Document System
