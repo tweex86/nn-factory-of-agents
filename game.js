@@ -211,11 +211,11 @@ const playerPositions = {
 };
 
 const agentButtons = [
-  { title: "Chat, Voice &\nMail Intake\nAgents", cost: 20 },
-  { title: "Extraction &\nValidation\nAgents", cost: 30 },
-  { title: "Policy Rules\nValidation\nAgents", cost: 15 },
-  { title: "Review &\nApproval\nAgents", cost: 50 },
-  { title: "Personal\nComms\nAgents", cost: 40 },
+  { title: "Chat, Voice &\nMail Intake\nAgents", cost: 5 },
+  { title: "Extraction &\nValidation\nAgents", cost: 10 },
+  { title: "Policy Rules\nValidation\nAgents", cost: 20 },
+  { title: "Review &\nApproval\nAgents", cost: 30 },
+  { title: "Personal\nComms\nAgents", cost: 50 },
 ].map((agent, index) => ({
   ...agent,
   x: 235 + index * 230,
@@ -464,11 +464,12 @@ function spawnFeedback(type, x, y) {
 }
 
 function missCoinPenalty() {
-  return 1 + state.robots.length;
+  const penalties = [0, 1, 2, 2, 3, 4];
+  return penalties[Math.min(state.robots.length, penalties.length - 1)];
 }
 
 function missNpsPenalty() {
-  return missCoinPenalty() * 0.5;
+  return (1 + state.robots.length) * 0.5;
 }
 
 function updateDocuments(delta) {
